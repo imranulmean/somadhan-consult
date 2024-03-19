@@ -133,7 +133,8 @@ export default function Header(props: HeaderProps) {
         )}
         {!minimalistic &&
           myAccount &&
-          (myAccount.full_name ? (
+          (myAccount.full_name ? 
+          (
             <>
               <button
                 type="button"
@@ -203,12 +204,10 @@ export default function Header(props: HeaderProps) {
                 </ul>
               </MobileSidebar>
             </>
-          ) : (
-            <button
-              type="button"
-              className="btn logout"
-              onClick={toggleLogoutModal}
-            >
+          ) 
+          : 
+          (
+            <button type="button" className="btn logout" onClick={toggleLogoutModal}>
               <LogoutSvg className="icon icon-logout" />
               <span className="logout-text">{t('Logout')}</span>
             </button>
