@@ -8,7 +8,9 @@ export const APPOINTMENT_FINISH_ROUTE = '/appointment/:appointmentId/finish'
 export const PROVIDERS_ROUTE = '/providers'
 export const PROVIDER_ROUTE = '/providers/:providerId'
 export const HISTORY_ROUTE = '/history'
+export const EXPERTS_ROUTE = '/experts'
 export const PUBLIC_ROUTES = [LOGIN_ROUTE, SIGNUP_ROUTE]
+
 
 export type Routes =
   | typeof ROOT_ROUTE
@@ -17,3 +19,4 @@ export type Routes =
   | typeof APPOINTMENT_ROUTE
   | typeof PROVIDERS_ROUTE
   | typeof HISTORY_ROUTE
+  | typeof EXPERTS_ROUTE

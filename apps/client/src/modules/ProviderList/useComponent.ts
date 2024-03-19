@@ -131,6 +131,7 @@ export default createUseComponent((props: ProviderListProps) => {
           actions.getUserAvatar(userId)
         })
       }
+      console.log("ocupantsIds: ",ocupantsIds);
     }
   }, [providers, loading])
 

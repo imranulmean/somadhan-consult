@@ -8,6 +8,7 @@ import {
   APPOINTMENT_FINISH_ROUTE,
   PROVIDER_ROUTE,
   GUEST_APPOINTMENT_ROUTE,
+  EXPERTS_ROUTE
 } from '../../constants/routes'
 
 import Modal from '../../components/Modal'
@@ -27,6 +28,7 @@ import AppointmentFinishScreen from '../AppointmentFinishScreen'
 import ProvidersScreen from '../ProvidersScreen'
 import ProfileScreen from '../ProfileScreen'
 import HistoryScreen from '../HistoryScreen'
+import ExpertsScreen from '../ExpertsScreen'
 
 import useComponent from './useComponent'
 import './styles.css'
@@ -71,6 +73,7 @@ export default function RootScreen() {
         )}
         <Route path={PROVIDERS_ROUTE} element={<ProvidersScreen />} />
         <Route path={PROVIDER_ROUTE} element={<ProvidersScreen />} />
+        <Route path={EXPERTS_ROUTE} element={<ExpertsScreen />} />
         <Route
           path="*"
           element={

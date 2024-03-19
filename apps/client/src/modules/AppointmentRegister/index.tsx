@@ -7,6 +7,7 @@ import CardAppointment from '../../components/CardAppointment'
 import FormField from '../../components/FormField'
 import FlatList from '../../components/FlatList'
 import useComponent, { AppointmentRegisterProps } from './useComponent'
+import Header from '../Header'
 import './styles.css'
 
 function NoData() {
@@ -49,6 +50,7 @@ export default function AppointmentRegister(props: AppointmentRegisterProps) {
 
   return (
     <div className="appointment-register">
+      {/* <Header /> */}
       <div className="register-header">
         <div className="register-header-nav">
           <button className="back" type="button" onClick={onBack}>

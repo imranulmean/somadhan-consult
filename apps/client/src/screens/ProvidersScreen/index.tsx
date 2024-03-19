@@ -12,6 +12,7 @@ export default function ProvidersScreen() {
     handlers: { handleChangeProvider, handleResetProvider },
   } = useComponent()
 
+  
   return (
     <div className="providers-screen">
       {HAS_PROVIDER_LIST && !defaultProviderId && (

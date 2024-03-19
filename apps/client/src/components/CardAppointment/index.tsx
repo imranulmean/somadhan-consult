@@ -66,7 +66,7 @@ export default function CardAppointment(props: CardAppointmentProps) {
             )}
           </div>
         )}
-        <p className="description">{appointment.description}</p>
+        <p className="description">{appointment.description}</p>        
       </div>
       <ChevronRightSvg className={cn('icon', { 'icon-top': showUserInfo })} />
     </div>

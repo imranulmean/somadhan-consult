@@ -21,6 +21,7 @@
     "@qc/icons": "workspace:*",
     "@qc/quickblox": "workspace:*",
     "@qc/template": "workspace:*",
+    "autoprefixer": "^10.4.18",
     "bowser": "^2.11.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
@@ -29,6 +30,7 @@
     "i18next": "^22.4.8",
     "lodash": "^4.17.21",
     "pdfmake": "^0.2.7",
+    "postcss": "^8.4.36",
     "react": "^18.2.0",
     "react-day-picker": "^8.4.1",
     "react-dom": "^18.2.0",
@@ -42,7 +44,8 @@
     "redux-persist-transform-encrypt": "^4.0.0",
     "redux-saga": "^1.2.2",
     "redux-state-sync": "^3.1.4",
-    "reselect": "^4.1.7"
+    "reselect": "^4.1.7",
+    "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",

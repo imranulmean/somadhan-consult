@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import localeOptions from '@qc/template/locales'
 
 import { updateMyAccount, toggleShowModal } from '../../actionCreators'
-import { PROFILE_ROUTE, HISTORY_ROUTE } from '../../constants/routes'
+import { PROFILE_ROUTE, HISTORY_ROUTE, EXPERTS_ROUTE } from '../../constants/routes'
 import { createUseComponent, useActions } from '../../hooks'
 import { authMyAccountSelector } from '../../selectors'
 import { createMapStateSelector } from '../../utils/selectors'
@@ -60,6 +60,11 @@ export default createUseComponent(() => {
       hide: !HAS_HISTORY || isGuestAccess,
     },
     {
+      label: t('Test'),
+      path: HISTORY_ROUTE,
+      hide: !HAS_HISTORY || isGuestAccess,
+    },
+    {
       label: t('Profile'),
       path: PROFILE_ROUTE,
       hide: isGuestAccess,
@@ -76,6 +81,7 @@ export default createUseComponent(() => {
     },
     { label: t('Profile'), path: PROFILE_ROUTE, hide: isGuestAccess },
     { label: t('Language'), onClick: toggleLanguageModal },
+    { label: t('Experts'), path: EXPERTS_ROUTE},
     { divider: !isGuestAccess },
     { label: t('Logout'), onClick: toggleLogoutModal },
   ]

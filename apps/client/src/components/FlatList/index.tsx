@@ -24,7 +24,7 @@ export default function FlatList<T>(props: FlatListProps<T>) {
     refreshing,
     renderItem,
   } = props
-
+  console.log("Appointment List: ", data );
   const container = useRef<HTMLDivElement>(null)
 
   const scrollHandler = () => {

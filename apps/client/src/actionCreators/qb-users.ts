@@ -24,10 +24,7 @@ export function getUserFailure(
   return { type: Types.QB_USER_GET_FAILURE, payload: { message: error, code } }
 }
 
-export function listUsers(
-  data: ListUserParams,
-  then?: (data: Types.QBUserListSuccessAction) => void,
-): Types.QBUserListRequestAction {
+export function listUsers(data: ListUserParams,then?: (data: Types.QBUserListSuccessAction) => void,): Types.QBUserListRequestAction {
   return {
     type: Types.QB_USER_LIST_REQUEST,
     payload: {
