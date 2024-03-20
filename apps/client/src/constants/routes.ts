@@ -9,6 +9,8 @@ export const PROVIDERS_ROUTE = '/providers'
 export const PROVIDER_ROUTE = '/providers/:providerId'
 export const HISTORY_ROUTE = '/history'
 export const EXPERTS_ROUTE = '/experts'
+export const HOME_ROUTE = '/home'
+export const ASKNOW_ROUTE = '/asknow'
 export const PUBLIC_ROUTES = [LOGIN_ROUTE, SIGNUP_ROUTE]
 
 
@@ -20,3 +22,5 @@ export type Routes =
   | typeof PROVIDERS_ROUTE
   | typeof HISTORY_ROUTE
   | typeof EXPERTS_ROUTE
+  | typeof HOME_ROUTE
+  | typeof ASKNOW_ROUTE
