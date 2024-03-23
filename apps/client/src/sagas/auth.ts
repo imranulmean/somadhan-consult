@@ -52,13 +52,14 @@ import { getLocale } from '../utils/locales'
 import { ajax } from './ajax'
 
 function* loginByToken(action: Types.QBLoginByTokenRequestAction) {
+
   try {
     const { session }: { session: QBSession } = yield promisifyCall(
       QB.startSessionWithToken,
       action.payload.token,
     )
     const user: QBUser = yield promisifyCall(QB.users.getById, session.user_id)
-
+      console.log("session.token: ",session.token);
     yield promisifyCall(QB.chat.connect, {
       jid: QB.chat.helpers.getUserJid(user.id),
       password: session.token,
@@ -87,7 +88,7 @@ function* loginByToken(action: Types.QBLoginByTokenRequestAction) {
 function* emailLoginWatcher(action: Types.QBEmailLoginRequestAction) {
   try {
     const { email, password } = action.payload
-
+    console.log("action.payload", action.payload);
     if (!email && !password) {
       throw new Error('Nor email/password, not provider info present')
     }
@@ -97,7 +98,7 @@ function* emailLoginWatcher(action: Types.QBEmailLoginRequestAction) {
       email,
       password,
     })
-
+    console.log("user: ", user);
     if (userIsProvider(user)) {
       yield promisifyCall(QB.logout)
       throw new Error('Unauthorized')

@@ -45,22 +45,8 @@ export default createUseComponent((props: ProviderDetailsProps) => {
   const { providerId } = props
   const selector = createSelector(providerId)
   const store = useSelector(selector)
-  const actions = useActions({
-    listUsers,
-    toggleShowModal,
-    getAppointments,
-    getUserAvatar,
-    createDialog,
-    createAppointmentDialog,
-  })
-  const {
-    user,
-    myAccountId,
-    appointment,
-    usersLoading,
-    appointmentLoading,
-    avatarEntries,
-  } = store
+  const actions = useActions({listUsers,toggleShowModal,getAppointments,getUserAvatar,createDialog,createAppointmentDialog,})
+  const {user,myAccountId,appointment,usersLoading,appointmentLoading,avatarEntries,} = store
   const loading = usersLoading || appointmentLoading
   const userAvatar = user?.id ? avatarEntries[user.id] : undefined
   const refBiography = useRef<HTMLPreElement>(null)
@@ -69,8 +55,7 @@ export default createUseComponent((props: ProviderDetailsProps) => {
   const navigate = useNavigate()
   const isOffline = useIsOffLine()
 
-  const dialogName =
-    user?.full_name || user?.login || user?.phone || user?.email || t('Unknown')
+  const dialogName = user?.full_name || user?.login || user?.phone || user?.email || t('Unknown')
   const userData = parseUserCustomData(user?.custom_data)
 
   const handleWaitingRoomClick = () => {

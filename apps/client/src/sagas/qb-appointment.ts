@@ -47,7 +47,6 @@ function* getAppointments(action: Types.QBAppointmentGetRequestAction) {
     const { entries } = normalize(items, '_id')
 
     const result = getAppointmentsSuccess({ entries, limit, skip })
-
     yield put(result)
 
     if (then) {

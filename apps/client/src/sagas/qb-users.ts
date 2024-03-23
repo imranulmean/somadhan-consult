@@ -18,18 +18,15 @@ import { authSessionSelector } from '../selectors'
 
 function* getUser(action: Types.QBUserGetRequestAction) {
   const { data, then, reset } = action.payload
-
+  
   try {
-    const response: ListUserResponse | QBUser = yield promisifyCall(
-      QB.users.get,
-      data,
-    )
+    const response: ListUserResponse | QBUser = yield promisifyCall(QB.users.get,data,)
     let result: Types.QBUserGetSuccessAction
 
     if ('items' in response) {
       const { items, current_page, per_page, total_entries } = response
 
-      const userList = items.map(({ user }) => user)
+      const userList = items.map(({ user }) => user)  
       const { entries } = normalize(userList, 'id')
 
       result = getUserSuccess({

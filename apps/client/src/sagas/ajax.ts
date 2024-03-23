@@ -42,6 +42,7 @@ export function ajax<T>(params: AjaxParams): Promise<AjaxResponse<T>> {
     url,
     username,
   } = params
+
   const xhr = new XMLHttpRequest()
   const request = new Promise<AjaxResponse<T>>((resolve, reject) => {
     xhr.open(method, url, async, username, password)
