@@ -15,14 +15,11 @@ export default function ProvidersScreen() {
   
   return (
     <div className="providers-screen">
-      {HAS_PROVIDER_LIST && !defaultProviderId && (
+      {
+        HAS_PROVIDER_LIST && !defaultProviderId && (
         <ProviderList selected={activeProviderId} onSelect={handleChangeProvider}/>
       )}
-      <div className={cn('provider-info', {
-          open: !HAS_PROVIDER_LIST || selectedProviderId || defaultProviderId,
-          'provider-info-wide': !HAS_PROVIDER_LIST || defaultProviderId,
-        })}
-      >
+      <div className={cn('provider-info', { open: !HAS_PROVIDER_LIST || selectedProviderId || defaultProviderId,'provider-info-wide': !HAS_PROVIDER_LIST || defaultProviderId,})}>        
         <ProviderDetails providerId={activeProviderId} onBack={handleResetProvider}/>
       </div>
     </div>

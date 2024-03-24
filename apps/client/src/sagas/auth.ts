@@ -59,7 +59,7 @@ function* loginByToken(action: Types.QBLoginByTokenRequestAction) {
       action.payload.token,
     )
     const user: QBUser = yield promisifyCall(QB.users.getById, session.user_id)
-      console.log("session.token: ",session.token);
+      
     yield promisifyCall(QB.chat.connect, {
       jid: QB.chat.helpers.getUserJid(user.id),
       password: session.token,
@@ -98,7 +98,8 @@ function* emailLoginWatcher(action: Types.QBEmailLoginRequestAction) {
       email,
       password,
     })
-    console.log("user: ", user);
+    console.log("user: ", user);    
+    localStorage.setItem('sessionToken', session.token);
     if (userIsProvider(user)) {
       yield promisifyCall(QB.logout)
       throw new Error('Unauthorized')

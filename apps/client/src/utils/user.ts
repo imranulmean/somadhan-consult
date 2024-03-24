@@ -5,9 +5,7 @@ interface QBUserWithCustomData extends Omit<QBUser, 'custom_data'> {
   custom_data: QBUserCustomData
 }
 
-export const parseUserCustomData = (
-  customDataText?: string | null,
-): QBUserCustomData => {
+export const parseUserCustomData = (customDataText?: string | null,): QBUserCustomData => {
   try {
     const customData: QBUserCustomData = customDataText
       ? JSON.parse(customDataText)

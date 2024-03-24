@@ -1,13 +1,10 @@
+import { useEffect } from 'react';
 import './styles.css'
-import QB, {
-    promisifyCall,
-    QBSession,
-    QBUser,
-    QBUserCustomData,
-  } from '@qc/quickblox'
-  
-export default function ExpertsScreen(){
 
+export default function ExpertsScreen(){
+    const sessionToken = localStorage.getItem('sessionToken');
+    console.log("sessionToken: ", sessionToken);
+    
     const experts=[
         {name:"Neil Sims", post:"Lawyer", profilePic:"https://flowbite.com/docs/images/people/profile-picture-1.jpg",ratings:[1,2,3,4], reviews:'90,000', filled:true },
         {name:"Bonnie Green", post:"Urologist", profilePic:"https://flowbite.com/docs/images/people/profile-picture-2.jpg", ratings:[1,2,3,4], reviews:'8,000', filled:false },
@@ -16,7 +13,12 @@ export default function ExpertsScreen(){
         {name:"Thomes Lean", post:"Lawyer", profilePic:"https://flowbite.com/docs/images/people/profile-picture-5.jpg", ratings:[1,2,3,4], reviews:'5,000', filled:false},
     ];    
     const getUserInfo=async()=>{
-        const userInfo=await fetch("https://api.quickblox.com/users/139595113");
+        const userInfo=await fetch("https://api.quickblox.com/users/139595112",{
+            method:"GET",
+            headers: {
+                "Qb-Token": `Bearer ${sessionToken}`,
+              },
+        });
         console.log(userInfo);
     }
     return (

@@ -16,10 +16,10 @@ export default function ProviderDetails(props: ProviderDetailsProps) {
     handlers: { handleWaitingRoomClick, createHandleClickSeeMore },
   } = useComponent(props)
   const { t } = useTranslation()
-
+  console.log("user: ", user);
   return (
-    <div className="provider-details">
-      <div className="provider-header">
+    <div className="provider-details">     
+      <div className="provider-header">      
         {HAS_PROVIDER_LIST && (
           <button className="back" type="button" onClick={onBack}>
             <BackSvg className="icon" />
@@ -37,33 +37,22 @@ export default function ProviderDetails(props: ProviderDetailsProps) {
         )}
       </div>
       <div className="provider-content">
-        <pre className="provider-description" ref={refBiography}>
-          {userData?.description}
+        <pre className="provider-description mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" ref={refBiography}>
+          {userData?.profession}          
         </pre>
         {refBiography.current?.clientHeight === 198 && (
           <div className="biography-controls">
-            <button
-              type="button"
-              className="biography-more"
-              onClick={createHandleClickSeeMore(user?.id)}
-            >
+            <button type="button" className="biography-more" onClick={createHandleClickSeeMore(user?.id)}>
               {t('SeeMore')}
             </button>
           </div>
         )}
-        <div className="btn-group">
-          <Button
-            mobileSize="auto"
-            theme="primary"
-            disabled={!user}
-            loading={loading}
-            onClick={handleWaitingRoomClick}
-            className="btn"
-          >
+        <div className="bg-blue-700 btn-group ">
+          <Button mobileSize="auto" theme="primary" disabled={!user} loading={loading} onClick={handleWaitingRoomClick} className="btn">
             {t('WaitingRoom')}
           </Button>
         </div>
-      </div>
+      </div>   
     </div>
   )
 }

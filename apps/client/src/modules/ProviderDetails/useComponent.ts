@@ -47,6 +47,7 @@ export default createUseComponent((props: ProviderDetailsProps) => {
   const store = useSelector(selector)
   const actions = useActions({listUsers,toggleShowModal,getAppointments,getUserAvatar,createDialog,createAppointmentDialog,})
   const {user,myAccountId,appointment,usersLoading,appointmentLoading,avatarEntries,} = store
+
   const loading = usersLoading || appointmentLoading
   const userAvatar = user?.id ? avatarEntries[user.id] : undefined
   const refBiography = useRef<HTMLPreElement>(null)

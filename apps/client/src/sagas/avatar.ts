@@ -20,9 +20,7 @@ function* getUserAvatar(action: Types.GetUserAvatarRequestAction) {
   const { userId, then } = action.payload
 
   try {
-    const session: ReturnType<typeof authSessionSelector> = yield select(
-      authSessionSelector,
-    )
+    const session: ReturnType<typeof authSessionSelector> = yield select(authSessionSelector,);
     const url = `${SERVER_APP_URL}/users/${userId}/avatar`
 
     const {
