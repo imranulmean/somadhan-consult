@@ -27,7 +27,7 @@ const updateByIdSchema = {
   response: {
     200: Type.Ref(QBUser),
   },
-  security: [{ apiKey: [] }] as Security,
+  security: [{ apiKey: ['rKEOJyfpSQiFFi7-Fa7eiqzVsW8CKqJbMuTnL25qBEM'] }] as Security,
 }
 
 const updateProvider: FastifyPluginAsyncTypebox = async (fastify) => {

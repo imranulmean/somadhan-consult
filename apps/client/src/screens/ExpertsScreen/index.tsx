@@ -13,17 +13,32 @@ export default function ExpertsScreen(){
         {name:"Thomes Lean", post:"Lawyer", profilePic:"https://flowbite.com/docs/images/people/profile-picture-5.jpg", ratings:[1,2,3,4], reviews:'5,000', filled:false},
     ];    
     const getUserInfo=async()=>{
-        const userInfo=await fetch("https://api.quickblox.com/users/139595112",{
+        const userInfo=await fetch("https://api.quickblox.com/users/139633560",{
             method:"GET",
             headers: {
-                "Qb-Token": `Bearer ${sessionToken}`,
+                "Qb-Token": `${sessionToken}`,
               },
         });
         console.log(userInfo);
     }
+    const addProviderRating=async()=>{
+        let data={"profession": "officer"};
+        const url = `${SERVER_APP_URL}/users/provider/139633560`
+        // const url = `https://api.quickblox.com/users/provider/139633560`
+        
+        const userInfo=await fetch(url,{
+            method:"PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${sessionToken}`,
+            },        
+            body: JSON.stringify(data),
+        });
+    }    
+
     return (
             <div className="providers-screen">
-                <button onClick={getUserInfo}>Get User Info</button>
+                <button onClick={addProviderRating}>Get User Info</button>
                 <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                     <div className="flow-root">
                         <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">

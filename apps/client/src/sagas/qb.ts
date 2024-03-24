@@ -19,9 +19,12 @@ function* init(action: Types.QBInitRequestAction) {
       authSessionSelector,
     )
     const sessionToken = token || session?.token
+    
 
     if (sessionToken) {
+      localStorage.setItem('sessionToken', sessionToken);
       yield put(loginByToken(sessionToken))
+      
     }
   } catch (e) {
     const errorMessage = stringifyError(e)

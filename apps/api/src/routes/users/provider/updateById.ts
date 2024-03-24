@@ -36,10 +36,11 @@ const updateByIdSchema = {
   response: {
     200: Type.Ref(QBUser),
   },
-  security: [{ apiKey: [] }] as Security,
+  security: [{ apiKey: ["rKEOJyfpSQiFFi7-Fa7eiqzVsW8CKqJbMuTnL25qBEM"] }] as Security,
 }
 
 const updateProvider: FastifyPluginAsyncTypebox = async (fastify) => {
+
   fastify.patch(
     '/:id',
     {
@@ -48,6 +49,7 @@ const updateProvider: FastifyPluginAsyncTypebox = async (fastify) => {
     },
     async (request) => {
       const { id } = request.params
+      console.log("request.params:",request.params);
       const { profession, description } = request.body
 
       const newUserData = pick(

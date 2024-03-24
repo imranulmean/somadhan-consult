@@ -52,6 +52,7 @@ const updateMySchema = {
 }
 
 const updateProvider: FastifyPluginAsyncTypebox = async (fastify) => {
+  
   fastify.patch(
     '',
     {
