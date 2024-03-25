@@ -31,6 +31,7 @@ export default function ExpertsScreen(){
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${sessionToken}`,
+                "apikey": "rKEOJyfpSQiFFi7-Fa7eiqzVsW8CKqJbMuTnL25qBEM"
             },        
             body: JSON.stringify(data),
         });

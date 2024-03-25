@@ -45,7 +45,7 @@ const updateProvider: FastifyPluginAsyncTypebox = async (fastify) => {
     '/:id',
     {
       schema: updateByIdSchema,
-      // onRequest: fastify.verify(fastify.BearerToken),
+      onRequest: fastify.verify(fastify.BearerToken),
     },
     async (request) => {
       const { id } = request.params
