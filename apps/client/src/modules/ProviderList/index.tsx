@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import cn from 'classnames'
-import { QBUser } from '@qc/quickblox'
+import QB, { QBUser } from '@qc/quickblox'
 
 import SearchSvg from '@qc/icons/navigation/search.svg'
 import UpdateSvg from '@qc/icons/actions/refresh.svg'
@@ -12,6 +12,7 @@ import Button from '../../components/Button'
 import FormField from '../../components/FormField'
 import Skeleton from '../../components/Skeleton'
 import './styles.css'
+import { useEffect, useState } from 'react'
 
 export default function ProviderList(props: ProviderListProps) {
   const { selected } = props
@@ -27,32 +28,84 @@ export default function ProviderList(props: ProviderListProps) {
   } = useComponent(props)
   const { t } = useTranslation()
 
-  const renderProvider = (user: QBUser) => {
+  const [providers, setProviders1]=useState<any[]>([]);
+
+  useEffect(()=>{
+    var searchParams = {
+      tags: "provider", //substring search
+      page: 1,
+      per_page: 50
+    };    
+    QB.users.get(searchParams, function(error, result) {
+      console.log("Greeting the result:", result);
+      if (result && result.items) {
+        const providerArray:any[]=result.items;
+        for(let i of providerArray){
+          i.user["rating"]=5;
+        }
+        setProviders1(providerArray); 
+      }       
+    });
+  },[])
+
+  // const renderProvider = (user: QBUser) => {
+    const renderProvider = (user: any) => {
     const dialogName = user.full_name || user.login || user.phone || user.email || t('Unknown')
     const userAvatar = avatarEntries[user.id]
+    const custom_data:any= JSON.parse(user?.custom_data);
     
+    console.log("custom_data: ",custom_data);
     return (
-      <li key={user.id} className={cn('provider-item', { active: user.id === selected })} onClick={handleProviderSelectCreator(user.id)}>
-        
-        <div className="flex w-full">
-          <div>
-            {!userAvatar || userAvatar.loading ? (
-              <Skeleton variant="circular" className="avatar" />
-            ) : (
-              <Avatar blob={userAvatar.blob} className="avatar" />
-            )}            
+      // <li key={user.id} className={cn('provider-item', { active: user.id === selected })} onClick={handleProviderSelectCreator(user.id)}>        
+      //   <div className="flex w-full">
+      //     <div>
+      //       {!userAvatar || userAvatar.loading ? (
+      //         <Skeleton variant="circular" className="avatar" />
+      //       ) : (
+      //         <Avatar blob={userAvatar.blob} className="avatar" />
+      //       )}            
+      //     </div>
+      //     <div className='flex flex-col '>
+      //       <span className="provider-name">{dialogName}</span>
+      //       <span>{user.custom_data}</span>
+      //       <span>Ratings: {user.rating}</span>
+      //     </div>
+      //     <div className='flex flex-1 justify-end'>
+      //       <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+      //         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+      //       </svg>
+      //     </div>          
+      //   </div>
+      // </li>
+        <div onClick={handleProviderSelectCreator(user.id)} className="w-full mb-1 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+          <div className="flex items-center justify-between"> 
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                {!userAvatar || userAvatar.loading ? (
+                  <Skeleton variant="circular" className="avatar" />
+                ) : (
+                  <Avatar blob={userAvatar.blob} className="avatar" />
+                )}
+              </div>
+              <div className="flex flex-col ms-4 justify-between">
+                <p className="text-md font-bold text-gray-900 truncate dark:text-white">
+                  {dialogName}
+                </p>
+                <p className="text-sm text-gray-800 truncate dark:text-gray-400">
+                  {custom_data?.profession}
+                </p>
+                <p className="text-sm text-gray-600 truncate dark:text-gray-400">
+                  {user.email}
+                </p>                           
+              </div>
+            </div>
+            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+              <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 5 7 7-7 7"/>
+              </svg>
+            </div>
           </div>
-          <div className='flex flex-col '>
-            <span className="provider-name">{dialogName}</span>
-            <span>{user.custom_data}</span>      
-          </div>
-          <div className='flex flex-1 justify-end'>
-            <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
-            </svg>
-          </div>          
         </div>
-      </li>
     )
   }
 
@@ -88,8 +141,10 @@ export default function ProviderList(props: ProviderListProps) {
           </div>
         </>
       )}
-      <ul className="providers">
-        {providersWithAssistants.map(renderProvider)}
+      {/* <ul className="providers">       */}
+      <ul className="p-2">
+        {/* {providersWithAssistants.map(renderProvider)} */}
+        {providers.map(p=>renderProvider(p.user))}
         {loading && (
           <li>
             <Loader theme="primary" />

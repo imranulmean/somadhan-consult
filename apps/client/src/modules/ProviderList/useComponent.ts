@@ -68,7 +68,7 @@ export default createUseComponent((props: ProviderListProps) => {
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => setSearch(value)
 
-  const handleProviderSelectCreator = (id: QBUser['id']) => () => {
+  const handleProviderSelectCreator = (id: QBUser['id']) => () => {    
     onSelect(id)
   }
 
@@ -131,14 +131,10 @@ export default createUseComponent((props: ProviderListProps) => {
           actions.getUserAvatar(userId)
         })
       }
-      console.log("ocupantsIds: ",ocupantsIds);
     }
   }, [providers, loading])
 
-  const providersWithAssistants =
-    AI_SUGGEST_PROVIDER && !isShowAll
-      ? suggestions
-      : providers.filter(filterSearchedProviders)
+  const providersWithAssistants = AI_SUGGEST_PROVIDER && !isShowAll  ? suggestions : providers.filter(filterSearchedProviders)
 
   return {
     forms: { searchForm },
