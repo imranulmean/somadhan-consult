@@ -37,6 +37,7 @@ import AskNowScreen from '../AskNowScreen'
 
 import useComponent from './useComponent'
 import './styles.css'
+import ExpertsProfileScreen from '../ExpertsProfileScreen'
 
 export default function RootScreen() {
   const {
@@ -81,6 +82,7 @@ export default function RootScreen() {
         <Route path={PROVIDERS_ROUTE} element={<ProvidersScreen />} />
         <Route path={PROVIDER_ROUTE} element={<ProvidersScreen />} />
         <Route path={EXPERTS_ROUTE} element={<ExpertsScreen />} />
+        <Route path="/experts/:expertId" element={<ExpertsProfileScreen />} />
         <Route
           path="*"
           element={
