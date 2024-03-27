@@ -1,4 +1,4 @@
-import { Link, generatePath } from 'react-router-dom'
+import { Link, generatePath, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import cn from 'classnames'
 import localeOptions from '@qc/template/locales'
@@ -20,6 +20,7 @@ interface HeaderProps {
 }
 
 export default function Header(props: HeaderProps) {
+  const path = useLocation().pathname;
   const { className, minimalistic } = props
   const {
     store: { myAccount },
@@ -58,7 +59,7 @@ export default function Header(props: HeaderProps) {
           {
             myAccount &&
             <div className='flex flex-1 justify-between items-center pr-6'>
-                <Link to='/home' className="whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
+                <Link to='/home' className={`${path.includes('home') && 'text-blue-500' } whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
                     <span className="flex flex-col items-center">
                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19c0 .6.4 1 1 1h3v-3c0-.6.4-1 1-1h2c.6 0 1 .4 1 1v3h3c.6 0 1-.4 1-1v-8.5"/>
@@ -66,7 +67,7 @@ export default function Header(props: HeaderProps) {
                         <p className='nav-menu-text'>Home</p>
                     </span> 
                 </Link>
-                <Link to='/inbox' className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
+                <Link to='/inbox' className={`${path.includes('providers') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
                   <span className="flex flex-col items-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M4 3a1 1 0 0 0-1 1v8c0 .6.4 1 1 1h1v2a1 1 0 0 0 1.7.7L9.4 13H15c.6 0 1-.4 1-1V4c0-.6-.4-1-1-1H4Z" clip-rule="evenodd"/>
@@ -75,7 +76,7 @@ export default function Header(props: HeaderProps) {
                     <p className='nav-menu-text'>Inbox</p>
                   </span>            
                 </Link>
-                <Link to='/askNow' className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
+                <Link to='/askNow' className={`${path.includes('askNow') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
                     <span className="flex flex-col items-center">
                       <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                           <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm9-3a1.5 1.5 0 0 1 2.5 1.1 1.4 1.4 0 0 1-1.5 1.5 1 1 0 0 0-1 1V14a1 1 0 1 0 2 0v-.5a3.4 3.4 0 0 0 2.5-3.3 3.5 3.5 0 0 0-7-.3 1 1 0 0 0 2 .1c0-.4.2-.7.5-1Zm1 7a1 1 0 1 0 0 2 1 1 0 1 0 0-2Z" clip-rule="evenodd"/>
@@ -83,7 +84,7 @@ export default function Header(props: HeaderProps) {
                       <p className='nav-menu-text'>Ask Now</p>
                     </span>            
                 </Link>
-                <Link to='/experts' className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
+                <Link to='/experts' className={`${path.includes('experts') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
                     <span className="flex flex-col items-center">
                       <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3a2.5 2.5 0 1 1 2-4.5M19.5 17h.5c.6 0 1-.4 1-1a3 3 0 0 0-3-3h-1m0-3a2.5 2.5 0 1 0-2-4.5m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3c0 .6-.4 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>

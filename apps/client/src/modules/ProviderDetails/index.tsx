@@ -16,43 +16,46 @@ export default function ProviderDetails(props: ProviderDetailsProps) {
     handlers: { handleWaitingRoomClick, createHandleClickSeeMore },
   } = useComponent(props)
   const { t } = useTranslation()
-  console.log("user: ", user);
+  console.log("Showing the user: ", user);
   return (
-    <div className="provider-details">     
-      <div className="provider-header">      
-        {HAS_PROVIDER_LIST && (
-          <button className="back" type="button" onClick={onBack}>
-            <BackSvg className="icon" />
-          </button>
-        )}
-        {!userAvatar || userAvatar.loading ? (
-          <Skeleton variant="circular" className="provider-avatar" />
-        ) : (
-          <Avatar blob={userAvatar.blob} className="provider-avatar" />
-        )}
-        {!user && usersLoading ? (
-          <Skeleton className="provider-name-skeleton" />
-        ) : (
-          <span className="provider-name">{dialogName}</span>
-        )}
-      </div>
-      <div className="provider-content">
-        <pre className="provider-description mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" ref={refBiography}>
-          {userData?.profession}          
-        </pre>
-        {refBiography.current?.clientHeight === 198 && (
-          <div className="biography-controls">
-            <button type="button" className="biography-more" onClick={createHandleClickSeeMore(user?.id)}>
-              {t('SeeMore')}
+    <>    
+      <div className="provider-details">     
+        <div className="provider-header">      
+          {HAS_PROVIDER_LIST && (
+            <button className="back" type="button" onClick={onBack}>
+              <BackSvg className="icon" />
             </button>
-          </div>
-        )}
-        <div className="bg-blue-700 btn-group ">
-          <Button mobileSize="auto" theme="primary" disabled={!user} loading={loading} onClick={handleWaitingRoomClick} className="btn">
-            {t('WaitingRoom')}
-          </Button>
+          )}
+          {!userAvatar || userAvatar.loading ? (
+            <Skeleton variant="circular" className="provider-avatar" />
+          ) : (
+            <Avatar blob={userAvatar.blob} className="provider-avatar" />
+          )}
+          {!user && usersLoading ? (
+            <Skeleton className="provider-name-skeleton" />
+          ) : (
+            <span className="provider-name">{dialogName}</span>
+          )}
         </div>
-      </div>   
-    </div>
+
+        <div className="provider-content">
+          <pre className="provider-description mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" ref={refBiography}>
+            {userData?.profession}       
+          </pre>
+          {refBiography.current?.clientHeight === 198 && (
+            <div className="biography-controls">
+              <button type="button" className="biography-more" onClick={createHandleClickSeeMore(user?.id)}>
+                {t('SeeMore')}
+              </button>
+            </div>
+          )}
+          <div className="bg-blue-700 btn-group ">
+            <Button mobileSize="auto" theme="primary" disabled={!user} loading={loading} onClick={handleWaitingRoomClick} className="btn">
+              {t('WaitingRoom')}
+            </Button>
+          </div>
+        </div>   
+      </div>
+    </>
   )
 }

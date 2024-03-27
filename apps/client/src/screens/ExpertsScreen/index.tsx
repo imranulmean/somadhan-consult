@@ -8,6 +8,9 @@ import QB, {
   import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function ExpertsScreen(){
+    const path=useLocation();
+    useLocation().state=path.pathname;
+    console.log(path);
     const sessionToken = localStorage.getItem('sessionToken');
     console.log("sessionToken: ", sessionToken);
     const [experts, setExperts]=useState<any[]>([]); 
