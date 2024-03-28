@@ -70,6 +70,10 @@ export default function ExpertsProfileScreen() {
     });
   }, [expertId]);
 
+  const handleGoBack= () =>{
+    window.history.back();
+  }
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -81,7 +85,7 @@ export default function ExpertsProfileScreen() {
   return (
     <div className="profile-screen">
         <div className="profile-screen-header">
-          <button className="back d-hidden" type="button" onClick={onBack}>
+          <button className="back d-hidden" type="button" onClick={handleGoBack}>
             <BackSvg className="icon" />
           </button>
           <p className="title header-title">{expertsProfile.full_name}</p>

@@ -137,17 +137,13 @@ export default function Header(props: HeaderProps) {
           (myAccount.full_name ? 
           (
             <>
-              <button
-                type="button"
-                // className="btn user d-hidden"
-                onClick={toggleMenuSidebarOpen}
-              >
+              <button  type="button"  className='md:hidden' onClick={toggleMenuSidebarOpen}>
+                {/* className="btn user d-hidden"  */}
                 {/* <UserSvg className="icon icon-user" /> */}
                 <img className="w-10 h-10 rounded-full" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Rounded avatar" />
                 {/* <svg style={{"height":"50px", "width":"50px"}} className="w-[100px] h-[100px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
                 </svg> */}
-
               </button>
               <Dropdown
                 className="header-dropdown dropdown-nav m-hidden"

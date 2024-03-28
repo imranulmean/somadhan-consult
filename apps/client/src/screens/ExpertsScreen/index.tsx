@@ -9,7 +9,6 @@ import QB, {
 
 export default function ExpertsScreen(){
     const path=useLocation();
-    useLocation().state=path.pathname;
     console.log(path);
     const sessionToken = localStorage.getItem('sessionToken');
     console.log("sessionToken: ", sessionToken);

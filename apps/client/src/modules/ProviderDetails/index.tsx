@@ -17,12 +17,16 @@ export default function ProviderDetails(props: ProviderDetailsProps) {
   } = useComponent(props)
   const { t } = useTranslation()
   console.log("Showing the user: ", user);
+  const handleGoBack= () =>{
+    window.history.back();
+  }
+
   return (
     <>    
       <div className="provider-details">     
         <div className="provider-header">      
           {HAS_PROVIDER_LIST && (
-            <button className="back" type="button" onClick={onBack}>
+            <button className="back" type="button" onClick={handleGoBack}>
               <BackSvg className="icon" />
             </button>
           )}
