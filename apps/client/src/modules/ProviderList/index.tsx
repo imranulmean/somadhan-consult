@@ -99,12 +99,12 @@ export default function ProviderList(props: ProviderListProps) {
             <div className="flex items-center justify-between"> 
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  {/* {!userAvatar || userAvatar.loading ? (
+                  {!userAvatar || userAvatar.loading ? (
                     <Skeleton variant="circular" className="avatar" />
                   ) : (
                     <Avatar blob={userAvatar.blob} className="avatar" />
-                  )} */}
-                  <img className="w-8 h-8 rounded-full" src={user.profilePic} alt="Neil image"/>               
+                  )}
+                  {/* <img className="w-8 h-8 rounded-full" src={user.profilePic} alt="Neil image"/>                */}
                 </div>
                 <div className="flex flex-col ms-4 justify-between">
                   <p className="text-md font-bold text-gray-900 truncate dark:text-white">

@@ -78,16 +78,17 @@ export default function RootScreen() {
         <Route path={APPOINTMENT_ROUTE} element={<AppointmentScreen />} />
         {HAS_HISTORY && (
           <Route path={HISTORY_ROUTE} element={<HistoryScreen />} />
-        )}
-        <Route path={PROVIDERS_ROUTE} element={<ProvidersScreen />} />
+        )}        
+        <Route path={PROVIDERS_ROUTE} element={<ExpertsScreen />} />
         <Route path={PROVIDER_ROUTE} element={<ProvidersScreen />} />
         <Route path={EXPERTS_ROUTE} element={<ExpertsScreen />} />
         <Route path="/experts/:expertId" element={<ExpertsProfileScreen />} />
+        <Route path="/inbox" element={<HistoryScreen />} />
         <Route
           path="*"
           element={
             <Navigate
-              to={location.state?.referrer || PROVIDERS_ROUTE}
+              to={location.state?.referrer || EXPERTS_ROUTE}
               replace
             />
           }

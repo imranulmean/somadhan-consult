@@ -63,7 +63,7 @@ export default function Header(props: HeaderProps) {
           </button>
         )}
       </div>
-      <div className="logo">
+      {/* <div className="logo">
         <Link to={ROOT_ROUTE}>
           <LogoSvg className="icon" />
         </Link>
@@ -74,7 +74,7 @@ export default function Header(props: HeaderProps) {
               : `v. ${VERSION}`}
           </span>
         )}
-      </div>
+      </div> */}
       <div className="header-nav header-nav-right">
         {myAccount && Boolean(createOptions.length) && (
           <Dropdown

@@ -17,35 +17,20 @@ function NoData() {
 }
 
 export default function AppointmentRegister(props: AppointmentRegisterProps) {
-  const {
-    fromDate,
-    toDate,
-    loading,
-    appointmentList,
-    loadMoreAppointments,
-    title,
-    onBack,
-    onSelectAppointment,
-  } = props
-  const {
-    forms: { dateFilterForm },
-    data: { disabledDays },
+
+  const { fromDate, toDate, loading, appointmentList, loadMoreAppointments, title, onBack, onSelectAppointment,} = props
+  const { 
+    forms: { dateFilterForm }, data: { disabledDays },
     store: { userEntries, usersLoading, avatarEntries },
     handlers: { handleChangeDate },
   } = useComponent(props)
   const { t } = useTranslation()
 
   const renderListItem = (appointment: QBAppointment) => (
-    <CardAppointment
-      showUserInfo
-      loading={loading || usersLoading}
-      key={appointment._id}
-      appointment={appointment}
-      user={userEntries[appointment.provider_id]}
-      avatar={avatarEntries[appointment.provider_id]}
-      onClick={() => onSelectAppointment(appointment._id)}
-      className="register-card"
-    />
+    
+    <CardAppointment showUserInfo loading={loading || usersLoading} key={appointment._id} appointment={appointment}
+      user={userEntries[appointment.provider_id]} avatar={avatarEntries[appointment.provider_id]}
+      onClick={() => onSelectAppointment(appointment._id)} className="register-card" />
   )
 
   return (
@@ -56,7 +41,8 @@ export default function AppointmentRegister(props: AppointmentRegisterProps) {
           <button className="back" type="button" onClick={onBack}>
             <BackSvg className="icon" />
           </button>
-          <span className="title">{title}</span>
+          {/* <span className="title">{title}</span> */}
+          <span className="title">Inbox</span>
         </div>
         <div className="date-filter">
           <div className="date-filter-field">

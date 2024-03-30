@@ -85,7 +85,8 @@
   }
 
   .appointment-register .register-header {
-    padding: 17px 13px;
+    /* padding: 17px 13px; */
+    padding: 1px 13px;
   }
 
   .appointment-register .register-header-nav {

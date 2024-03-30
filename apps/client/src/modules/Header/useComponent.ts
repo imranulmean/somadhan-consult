@@ -74,14 +74,14 @@ export default createUseComponent(() => {
   ]
 
   const menuMobileOptions = [
-    {
-      label: t('History'),
-      path: HISTORY_ROUTE,
-      hide: !HAS_HISTORY || isGuestAccess,
-    },
+    // {
+    //   label: t('History'),
+    //   path: HISTORY_ROUTE,
+    //   hide: !HAS_HISTORY || isGuestAccess,
+    // },
     { label: t('Profile'), path: PROFILE_ROUTE, hide: isGuestAccess },
-    { label: t('Language'), onClick: toggleLanguageModal },
-    { label: t('Experts'), path: EXPERTS_ROUTE},
+    // { label: t('Language'), onClick: toggleLanguageModal },
+    // { label: t('Experts'), path: EXPERTS_ROUTE},
     { divider: !isGuestAccess },
     { label: t('Logout'), onClick: toggleLogoutModal },
   ]

@@ -15,15 +15,7 @@ interface FlatListProps<T> {
 }
 
 export default function FlatList<T>(props: FlatListProps<T>) {
-  const {
-    className,
-    data,
-    ListEmptyComponent,
-    onEndReached,
-    onEndReachedThreshold,
-    refreshing,
-    renderItem,
-  } = props
+  const { className, data, ListEmptyComponent, onEndReached, onEndReachedThreshold, refreshing, renderItem,} = props
   console.log("Appointment List: ", data );
   const container = useRef<HTMLDivElement>(null)
 
@@ -52,7 +44,7 @@ export default function FlatList<T>(props: FlatListProps<T>) {
       <Loader className={cn({ active: refreshing })} theme="primary" />
       {data.length ? (
         <div className="list-content" onScroll={scrollHandler} ref={container}>
-          {data.map(renderItem)}
+          {data.map(renderItem)} 
         </div>
       ) : (
         !refreshing && ListEmptyComponent && <ListEmptyComponent />

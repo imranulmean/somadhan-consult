@@ -13,6 +13,12 @@ import MobileSidebar from '../../components/MobileSidebar'
 import { ROOT_ROUTE } from '../../constants/routes'
 import useComponent from './useComponent'
 import './styles.css'
+import { useEffect, useState } from 'react'
+import QB, {
+  promisifyCall,
+  QBAppointment,
+  QBDataDeletedResponse,
+} from '@qc/quickblox'
 
 interface HeaderProps {
   className?: string
@@ -41,7 +47,32 @@ export default function Header(props: HeaderProps) {
     },
   } = useComponent()
   const { t } = useTranslation()
-  console.log("myAccount: ",myAccount);
+  const [myProfilePic, setMyprofilePic]= useState<any>("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
+  
+  useEffect(()=>{
+     console.log("myAccount: ",myAccount);
+    const myData:any=myAccount;
+    const getMyPic =async ()=>{
+      if (myData.blob_id && myData.blob_id !== null) {
+        const blobId = myData.blob_id;
+        try {
+          const expertBlob:any = await new Promise((resolve, reject) => {
+            QB.content.getInfo(blobId, (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            });
+          });
+          const fileUID:any = expertBlob?.blob.uid;
+          const fileUrl = QB.content.privateUrl(fileUID);
+          setMyprofilePic(fileUrl);
+        } catch (error) {
+          console.error("Error fetching profile picture:", error);
+        }
+      }
+    }
+    getMyPic();
+
+  },[myAccount])
   return (
     // <header className={cn('header', className, { 'header-auth': myAccount })}>
     <header className="header flex justify-between items-center p-3"> 
@@ -64,16 +95,16 @@ export default function Header(props: HeaderProps) {
                         <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19c0 .6.4 1 1 1h3v-3c0-.6.4-1 1-1h2c.6 0 1 .4 1 1v3h3c.6 0 1-.4 1-1v-8.5"/>
                         </svg>
-                        <p className='nav-menu-text'>Home</p>
+                        <p className='nav-menu-text text-xs md:text-sm'>Home</p>
                     </span> 
                 </Link>
-                <Link to='/inbox' className={`${path.includes('providers') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
+                <Link to='/inbox' className={`${path.includes('inbox') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
                   <span className="flex flex-col items-center">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M4 3a1 1 0 0 0-1 1v8c0 .6.4 1 1 1h1v2a1 1 0 0 0 1.7.7L9.4 13H15c.6 0 1-.4 1-1V4c0-.6-.4-1-1-1H4Z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M8 17.2h.1l2.1-2.2H15a3 3 0 0 0 3-3V8h2c.6 0 1 .4 1 1v8c0 .6-.4 1-1 1h-1v2a1 1 0 0 1-1.7.7L14.6 18H9a1 1 0 0 1-1-.8Z" clip-rule="evenodd"/>
                     </svg>
-                    <p className='nav-menu-text'>Inbox</p>
+                    <p className='nav-menu-text text-xs md:text-sm'>Inbox</p>
                   </span>            
                 </Link>
                 <Link to='/askNow' className={`${path.includes('askNow') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
@@ -81,7 +112,7 @@ export default function Header(props: HeaderProps) {
                       <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                           <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm9-3a1.5 1.5 0 0 1 2.5 1.1 1.4 1.4 0 0 1-1.5 1.5 1 1 0 0 0-1 1V14a1 1 0 1 0 2 0v-.5a3.4 3.4 0 0 0 2.5-3.3 3.5 3.5 0 0 0-7-.3 1 1 0 0 0 2 .1c0-.4.2-.7.5-1Zm1 7a1 1 0 1 0 0 2 1 1 0 1 0 0-2Z" clip-rule="evenodd"/>
                       </svg>                
-                      <p className='nav-menu-text'>Ask Now</p>
+                      <p className='nav-menu-text text-xs md:text-sm'>Ask Now</p>
                     </span>            
                 </Link>
                 <Link to='/experts' className={`${path.includes('experts') && 'text-blue-500' } self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white`}>
@@ -89,7 +120,7 @@ export default function Header(props: HeaderProps) {
                       <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3a2.5 2.5 0 1 1 2-4.5M19.5 17h.5c.6 0 1-.4 1-1a3 3 0 0 0-3-3h-1m0-3a2.5 2.5 0 1 0-2-4.5m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3c0 .6-.4 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
                       </svg>              
-                      <p className='nav-menu-text'>Experts</p>
+                      <p className='nav-menu-text text-xs md:text-sm'>Experts</p>
                     </span>            
                 </Link>                    
             </div>            
@@ -132,6 +163,8 @@ export default function Header(props: HeaderProps) {
             </Dropdown>
           </>
         )}
+
+        {/* //////////// Mobile View ///////////// */}
         {!minimalistic &&
           myAccount &&
           (myAccount.full_name ? 
@@ -140,7 +173,8 @@ export default function Header(props: HeaderProps) {
               <button  type="button"  className='md:hidden' onClick={toggleMenuSidebarOpen}>
                 {/* className="btn user d-hidden"  */}
                 {/* <UserSvg className="icon icon-user" /> */}
-                <img className="w-10 h-10 rounded-full" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Rounded avatar" />
+                {/* <img className="w-10 h-10 rounded-full" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Rounded avatar" /> */}
+                <img className="w-10 h-10 rounded-full" src={myProfilePic} alt="Rounded avatar" />
                 {/* <svg style={{"height":"50px", "width":"50px"}} className="w-[100px] h-[100px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
                 </svg> */}
