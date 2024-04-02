@@ -85,13 +85,13 @@ export default function ExpertsScreen(){
                                                         
                                                     </div>
                                                     <div className="flex-1 min-w-0 ms-4">
-                                                        <p className="text-md font-bold text-gray-800 truncate dark:text-white">
+                                                        <p className="text-sm font-bold text-gray-900 truncate dark:text-white">
                                                             {exp.user.full_name}
                                                         </p>
                                                         <p className="text-sm text-gray-700 truncate dark:text-gray-400">
                                                             {exp.user.profession}
                                                         </p>
-                                                        <p className="text-sm text-gray-700 truncate dark:text-gray-400">
+                                                        <p className="text-xs text-gray-600 truncate dark:text-gray-400">
                                                             {exp.user.email}
                                                         </p>                                                        
                                                     </div>

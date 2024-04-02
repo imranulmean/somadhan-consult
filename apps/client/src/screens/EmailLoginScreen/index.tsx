@@ -9,14 +9,12 @@ import useComponent from './useComponent'
 import { useNavigate } from 'react-router-dom'
 import './styles.css'
 import QB from '@qc/quickblox'
-import { useRef } from 'react';
 
 export default function EmailLoginScreen() {
 
   const navigate= useNavigate();
   const {  forms: { loginForm }, data: { isOffLine, loading, error, location, handleSubmit },} = useComponent()
   const { t } = useTranslation()
-  const submitButtonRef = useRef<any>(null);
 
   const handleLogin=()=>{
     var params = { email: "test1@gmail.com", password: "12345678" };
@@ -27,7 +25,6 @@ export default function EmailLoginScreen() {
     //     navigate('/home');
     //   });      
     // });
-    console.log("clicked")
     loginForm.values.email="test1@gmail.com";
     loginForm.values.password="12345678"
     handleSubmit(params); 
@@ -56,7 +53,7 @@ export default function EmailLoginScreen() {
         </FormField>
 
         <div className="btn-group">
-          <Button ref={submitButtonRef}  theme="primary" disabled={isOffLine} loading={loading} type="submit" className="btn" size="sm">
+          <Button  theme="primary" disabled={isOffLine} loading={loading} type="submit" className="btn" size="sm">
             {t('SignIn')}
           </Button>     
         </div>
