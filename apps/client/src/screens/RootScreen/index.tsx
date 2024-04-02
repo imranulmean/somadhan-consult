@@ -84,8 +84,7 @@ export default function RootScreen() {
         <Route path={EXPERTS_ROUTE} element={<ExpertsScreen />} />
         <Route path="/experts/:expertId" element={<ExpertsProfileScreen />} />
         <Route path="/inbox" element={<HistoryScreen />} />
-        <Route
-          path="*"
+        <Route path="*"
           element={
             <Navigate
               to={location.state?.referrer || EXPERTS_ROUTE}
