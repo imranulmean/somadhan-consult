@@ -14,7 +14,7 @@ import { useRef } from 'react';
 export default function EmailLoginScreen() {
 
   const navigate= useNavigate();
-  const {  forms: { loginForm }, data: { isOffLine, loading, error, location },} = useComponent()
+  const {  forms: { loginForm }, data: { isOffLine, loading, error, location, handleSubmit },} = useComponent()
   const { t } = useTranslation()
   const submitButtonRef = useRef<any>(null);
 
@@ -30,12 +30,7 @@ export default function EmailLoginScreen() {
     console.log("clicked")
     loginForm.values.email="test1@gmail.com";
     loginForm.values.password="12345678"
-    // loginForm.handleSubmit(params);
-    // Trigger click event on the submit button
-    if (submitButtonRef.current) {
-        submitButtonRef.current.click();
-    }    
-
+    handleSubmit(params); 
   }
 
   return (

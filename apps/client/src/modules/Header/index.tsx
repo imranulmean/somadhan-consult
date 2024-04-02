@@ -53,7 +53,7 @@ export default function Header(props: HeaderProps) {
      console.log("myAccount: ",myAccount);
     const myData:any=myAccount;
     const getMyPic =async ()=>{
-      if (myData.blob_id && myData.blob_id !== null) {
+      if (myData && myData.blob_id && myData.blob_id !== null) {
         const blobId = myData.blob_id;
         try {
           const expertBlob:any = await new Promise((resolve, reject) => {

@@ -84,6 +84,8 @@ export default createUseComponent(() => {
       loading,
       error,
       location,
+      handleSubmit
     },
+    
   }
 })
