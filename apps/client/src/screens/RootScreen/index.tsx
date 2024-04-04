@@ -87,7 +87,7 @@ export default function RootScreen() {
         <Route path="*"
           element={
             <Navigate
-              to={location.state?.referrer || EXPERTS_ROUTE}
+              to={location.state?.referrer || HOME_ROUTE}
               replace
             />
           }

@@ -16,50 +16,53 @@ export default function ExpertsScreen(){
 
     useEffect(() => {
 
-        const getAllExperts = async () => {
-          var searchParams = {
-            tags: "provider",
-            page: 1,
-            per_page: 50
-          };
-      
-          QB.users.get(searchParams, function (error, result) {
-            if (result && result.items) {
-              const providerArray = result.items.map(async (item) => {
-                const user:any = item.user;
-                if (user.blob_id && user.blob_id !== null) {
-                  const blobId = user.blob_id;
-                  try {
-                    const expertBlob:any = await new Promise((resolve, reject) => {
-                      QB.content.getInfo(blobId, (error, result) => {
-                        if (error) reject(error);
-                        else resolve(result);
-                      });
-                    });
-                    const fileUID:any = expertBlob?.blob.uid;
-                    const fileUrl = QB.content.privateUrl(fileUID);
-                    user['profilePic'] = fileUrl;
-                  } catch (error) {
-                    console.error("Error fetching profile picture:", error);
-                  }
-                }
-                user["rating"] = 5;
-                if(user.custom_data!==null){
-                    const parsedCustomData: any = JSON.parse(user.custom_data || "");
-                    user['profession']=parsedCustomData.profession
-                }
-                
-                return item;
-              });
-      
-              Promise.all(providerArray).then((updatedProviders) => {
-                setExperts(updatedProviders);
-              }).catch((error) => {
-                console.error("Error updating experts:", error);
-              });
-            }
-          });
+      const getAllExperts = async () => {
+        var searchParams = {
+          tags: "provider",
+          page: 1,
+          per_page: 50
         };
+    
+        QB.users.get(searchParams, function (error, result) {
+          if(error){
+            console.log("Fetching Errors: ",JSON.stringify(error));
+          }
+          if (result && result.items) {
+            const providerArray = result.items.map(async (item) => {
+              const user:any = item.user;
+              if (user.blob_id && user.blob_id !== null) {
+                const blobId = user.blob_id;
+                try {
+                  const expertBlob:any = await new Promise((resolve, reject) => {
+                    QB.content.getInfo(blobId, (error, result) => {
+                      if (error) reject(error);
+                      else resolve(result);
+                    });
+                  });
+                  const fileUID:any = expertBlob?.blob.uid;
+                  const fileUrl = QB.content.privateUrl(fileUID);
+                  user['profilePic'] = fileUrl;
+                } catch (error) {
+                  console.error("Error fetching profile picture:", error);
+                }
+              }
+              user["rating"] = 5;
+              if(user.custom_data!==null){
+                  const parsedCustomData: any = JSON.parse(user.custom_data || "");
+                  user['profession']=parsedCustomData.profession
+              }
+              
+              return item;
+            });
+    
+            Promise.all(providerArray).then((updatedProviders) => {
+              setExperts(updatedProviders);
+            }).catch((error) => {
+              console.error("Error updating experts:", error);
+            });
+          }
+        });
+      };
       
         getAllExperts();
       }, []);

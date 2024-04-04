@@ -13,11 +13,11 @@ import QB from '@qc/quickblox'
 export default function EmailLoginScreen() {
 
   const navigate= useNavigate();
-  const {  forms: { loginForm }, data: { isOffLine, loading, error, location, handleSubmit },} = useComponent()
+  const {  forms: { loginForm }, data: { isOffLine, loading, error, location, handleSubmit, handleCreate },} = useComponent()
   const { t } = useTranslation()
 
   const handleLogin=()=>{
-    var params = { email: "test1@gmail.com", password: "12345678" };
+    var params = { email: "asd@gmail.com", password: "12345678" };
     // QB.createSession(params, function(error, result) {
     //   console.log(result);
     //   QB.login(params, function(error, result) {
@@ -27,7 +27,10 @@ export default function EmailLoginScreen() {
     // });
     loginForm.values.email="test1@gmail.com";
     loginForm.values.password="12345678"
-    handleSubmit(params); 
+    // handleSubmit(params); 
+    //////// Create User ///////
+    handleCreate(params);
+    // handleSubmit(params); 
   }
 
   return (

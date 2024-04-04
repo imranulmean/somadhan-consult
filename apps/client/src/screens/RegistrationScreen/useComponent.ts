@@ -8,12 +8,7 @@ import { QBUser, QBUserCustomData } from '@qc/quickblox'
 import { createUseComponent, useActions, useForm } from '../../hooks'
 import useIsOffLine from '../../hooks/useIsOffLine'
 import { validateEmail, validateFullName } from '../../utils/validate'
-import {
-  clearAuthError,
-  createAccount,
-  emailLogin,
-  clearQBError,
-} from '../../actionCreators'
+import { clearAuthError, createAccount, emailLogin, clearQBError, } from '../../actionCreators'
 import { createMapStateSelector } from '../../utils/selectors'
 import {
   authErrorSelector,
@@ -41,12 +36,7 @@ const selector = createMapStateSelector({
 
 export default createUseComponent(() => {
   const store = useSelector(selector)
-  const actions = useActions({
-    createAccount,
-    emailLogin,
-    clearAuthError,
-    clearQBError,
-  })
+  const actions = useActions({ createAccount, emailLogin, clearAuthError, clearQBError, })
   const location = useLocation() as { state: { referrer?: string } }
   const isOffLine = useIsOffLine()
   const { t } = useTranslation()

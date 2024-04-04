@@ -6,7 +6,7 @@ import { QBUser } from '@qc/quickblox'
 import { createUseComponent, useActions, useForm } from '../../hooks'
 import useIsOffLine from '../../hooks/useIsOffLine'
 import { validateEmail } from '../../utils/validate'
-import { emailLogin, clearAuthError, clearQBError } from '../../actionCreators'
+import { emailLogin, clearAuthError, clearQBError, createAccount } from '../../actionCreators'
 import { createMapStateSelector } from '../../utils/selectors'
 import {
   authErrorSelector,
@@ -14,6 +14,7 @@ import {
   qbErrorSelector,
   qbLoadingSelector,
 } from '../../selectors'
+import { values } from 'lodash'
 
 type FormValues = Required<Pick<QBUser, 'email' | 'password'>>
 
@@ -28,11 +29,7 @@ const selector = createMapStateSelector({
 
 export default createUseComponent(() => {
   const store = useSelector(selector)
-  const actions = useActions({
-    emailLogin,
-    clearAuthError,
-    clearQBError,
-  })
+  const actions = useActions({ emailLogin, clearAuthError, clearQBError, createAccount })
   const isOffLine = useIsOffLine()
   const location = useLocation() as { state: { referrer?: string } }
   const { qbLoading, authLoading, qbError, authError } = store
@@ -57,6 +54,21 @@ export default createUseComponent(() => {
 
   const handleSubmit = (values: FormValues) => {
     actions.emailLogin(values)
+  }
+
+  const handleCreate = (values: FormValues) => {
+    const userData = {
+      email: values.email,
+      password: values.password,
+      full_name: values.email ,
+      custom_data: {
+        address: "null",
+        gender: "null",    
+    }
+  }
+    actions.createAccount(userData, () => {
+      handleSubmit(userData);
+    })    
   }
 
   const loginForm = useForm<FormValues, FormErrors>({
@@ -84,7 +96,8 @@ export default createUseComponent(() => {
       loading,
       error,
       location,
-      handleSubmit
+      handleSubmit,
+      handleCreate
     },
     
   }
