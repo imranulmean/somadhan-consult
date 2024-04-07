@@ -29,8 +29,16 @@ export default function EmailLoginScreen() {
     loginForm.values.password="12345678"
     // handleSubmit(params); 
     //////// Create User ///////
-    handleCreate(params);
-    // handleSubmit(params); 
+    // handleCreate(params);
+    //check if the user is there ///
+    QB.createSession(params, function(error, result) {
+      var searchParams = {email: "fahad@gmail.com"};    
+      QB.users.get(searchParams, function(error, user) {
+          console.log(user);
+      });    
+    });    
+    
+    
   }
 
   return (
